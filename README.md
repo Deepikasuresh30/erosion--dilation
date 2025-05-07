@@ -26,45 +26,36 @@ Display and compare the original, eroded, and dilated images.
 ```
 import cv2
 import numpy as np
-import matplotlib.pyplot as plt
-```
-```
-image = np.zeros((500, 500, 3), dtype=np.uint8)
-```
-```
-font = cv2.FONT_HERSHEY_SIMPLEX
-cv2.putText(image, 'Hello World', (100, 250), font, 1, (255, 255, 255), 2, cv2.LINE_AA)
-```
-```
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))  # Convert BGR to RGB for displaying
-plt.title("Input Image with Text")
-plt.axis('off')
-```
-```
-kernel = np.ones((3, 3), np.uint8)
-eroded_image = cv2.erode(image, kernel, iterations=1)
-```
-```
-plt.imshow(cv2.cvtColor(eroded_image, cv2.COLOR_BGR2RGB))
-plt.title("Eroded Image")
-plt.axis('off')
-```
-```
-dilated_image = cv2.dilate(image, kernel, iterations=1)
-```
-```
-plt.imshow(cv2.cvtColor(dilated_image, cv2.COLOR_BGR2RGB)) 
-plt.title("Dilated Image")
-plt.axis('off')
+from matplotlib import pyplot as plt
+# Load the image
+img1=np.zeros((100,500),dtype='uint8')
+font=cv2.FONT_HERSHEY_COMPLEX_SMALL
+
+# Create the text using cv2.putText
+cv2.putText(img1,'Deepika S' ,(5,70),font,4,(255),2,cv2.LINE_AA)
+
+
+# Create the structuring element
+kernel1=cv2.getStructuringElement(cv2.MORPH_CROSS,(5,5))
+
+# Dilate the image
+img_dilate=cv2.dilate(img1,kernel1)
+img_erode=cv2.erode(img1,kernel1)
+
+# Display the results
+plt.figure(figsize=(12, 5))
+plt.subplot(1,3,1)
+plt.imshow(img1,cmap='gray')
+plt.subplot(1,3,2)
+plt.imshow(img_dilate,cmap='gray')
+plt.subplot(1,3,3)
+plt.imshow(img_erode,cmap='gray')
 ```
 
 ## Output:
 
-![image](https://github.com/user-attachments/assets/fc675126-5b25-469d-bc8b-efd1de8da69d)
 
-![image](https://github.com/user-attachments/assets/5ba57752-8b3f-4e4e-8b62-07ff93c4afb3)
-
-![image](https://github.com/user-attachments/assets/1cc3f1e3-8ee5-40e1-a4b8-c2aada6aef88)
+![image](https://github.com/user-attachments/assets/09baf995-4806-459e-b899-c06d01cd1d8e)
 
 
 # Result
